@@ -2,7 +2,17 @@
   "name": "tesseract",
   "version": "1.0.0",
   "main": "index.js",
+  "private": true,
+  "author": "Akanimoh Osutuk",
   "license": "MIT",
-  "workspaces": ["packages/*"],
-  "scripts": {}
+  "workspaces": [
+    "packages/contracts",
+    "packages/dapp"
+  ],
+  "scripts": {
+    "build:all": "yarn workspaces foreach run build"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }
