@@ -1,0 +1,10 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Akanimoh Osutuk <fibrinlab@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "forge build"
+  }
+}
