@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity 0.8.20;
 
 // The functions in DiamondLoupeFacet MUST be added to a diamond.
 // The EIP-2535 Diamond standard requires these functions.
