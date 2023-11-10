@@ -18,7 +18,7 @@ packages/contracts/docs/
 # Dotenv file
 packages/contracts/.env
 
-
+# *********dapp**********
 
 # dependencies
 packages/dapp/node_modules
@@ -41,3 +41,8 @@ packages/dapp.env.production.local
 packages/dappnpm-debug.log*
 packages/dappyarn-debug.log*
 packages/dappyarn-error.log*
+
+
+# *********congnito**********
+packages/congnito-vm/.sunodo
+packages/congnito-vm/.venv
