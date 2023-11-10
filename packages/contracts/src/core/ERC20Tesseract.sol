@@ -69,8 +69,8 @@ abstract contract ERC20Tesseract is ERC20Permit, ERC20Pausable, IERC20Tesseract 
 
     function burnFrom(address account, uint256 amount) public virtual;
 
-    function nonces(address owner) public view override(ERC20Permit, IERC20Permit) {
-        super.nonces(owner);
+    function nonces(address owner) public view override(IERC20Permit, ERC20Permit) returns (uint256) {
+        return super.nonces(owner);
     }
 
     function _update(

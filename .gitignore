@@ -1,6 +1,6 @@
 .env
 node_modules
-
+.vscode
 
 
 # Compiler files
@@ -44,5 +44,5 @@ packages/dappyarn-error.log*
 
 
 # *********congnito**********
-packages/congnito-vm/.sunodo
-packages/congnito-vm/.venv
+packages/cognito-vm/.sunodo/
+packages/cognito-vm/.venv/

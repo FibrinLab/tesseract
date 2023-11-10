@@ -16,3 +16,9 @@ bytes32 constant GOVERNANCE_TOKEN_BURNER_ROLE = keccak256(
 
 /// @dev Role name for pauser
 bytes32 constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+
+/// @dev Reentrancy constant
+uint256 constant _NOT_ENTERED = 1;
+
+/// @dev Reentrancy constant
+uint256 constant _ENTERED = 2;
