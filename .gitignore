@@ -2,7 +2,7 @@
 node_modules
 .vscode
 
-
+# *********dapp**********
 # Compiler files
 packages/contracts/cache/
 packages/contracts/out/
@@ -20,27 +20,15 @@ packages/contracts/.env
 
 # *********dapp**********
 
-# dependencies
-packages/dapp/node_modules
-packages/dapp/.pnp
-packages/dapp.pnp.js
+/packages/dapp/build
+/packages/dapp/public/build
+/packages/dapp/.env
 
-# testing
-packages/dapp/coverage
+/packages/dapp/cypress/screenshots
+/packages/dapp/cypress/videos
+/packages/dapp/prisma/data.db
+/packages/dapp/prisma/data.db-journal
 
-# production
-packages/dapp/build
-
-# misc
-packages/dapp.DS_Store
-packages/dapp.env.local
-packages/dapp.env.development.local
-packages/dapp.env.test.local
-packages/dapp.env.production.local
-
-packages/dappnpm-debug.log*
-packages/dappyarn-debug.log*
-packages/dappyarn-error.log*
 
 
 # *********congnito**********
