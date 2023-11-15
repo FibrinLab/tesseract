@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "18.14.1"
+          node-version: "18.13.0"
 
       - name: Install dependencies
         run: sudo apt -y update && sudo apt -y install libusb-1.0-0-dev libudev-dev
@@ -42,10 +42,26 @@ jobs:
       - name: Build All
         env:
           FOUNDRY_DENY_WARNINGS: true
-        run: yarn build
+        run: yarn build:contract
 
       - name: Test All
         run: yarn test:all
+
+      - name: Prepare Deployment Artifact
+        env:
+          EVENT_NAME: ${{github.event_name}}
+          PR_NUMBER: ${{ github.event.number }}
+          SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: |
+          echo "event_name=$EVENT_NAME,pr_number=$PR_NUMBER,sha=$SHA"
+          mkdir -p ./pr
+          echo "event_name=$EVENT_NAME,pr_number=$PR_NUMBER,sha=$SHA," > ./pr/pr_number
+          cd ./packages/dapp/dist && zip -r ../../../pr/pull-request.zip ./*
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pr
+          path: pr/
 
 
 
