@@ -8,49 +8,45 @@ env:
   FOUNDRY_PROFILE: ci
 
 jobs:
-    build-and-test:
-      name: Build & Test
-      runs-on: ubuntu-22.04
-      permissions:
-        contents: read
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-          with:
-            submodules: recursive
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
-        - name: Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: "18.14.1"
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.14.1"
 
-        - name: Install dependencies
-          run: sudo apt -y update && sudo apt -y install libusb-1.0-0-dev libudev-dev
+      - name: Install dependencies
+        run: sudo apt -y update && sudo apt -y install libusb-1.0-0-dev libudev-dev
 
-        - name: Install Foundry
-          uses: foundry-rs/foundry-toolchain@v1
-          with:
-            version: nightly
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
 
-        - name: Yarn Install
-          run: yarn install --mode=skip-build
+      - name: Yarn Install
+        run: yarn install --mode=skip-build
+
+      - name: Setup Forge
+        run: yarn workspace contracts forge:install
+
+      - name: Build All
+        env:
+          FOUNDRY_DENY_WARNINGS: true
+        run: yarn build
+
+      - name: Test All
+        run: yarn test:all
 
 
 
 
-
-
-
-
-      
-      - name: Run Forge build
-        run: |
-          forge --version
-          forge build --sizes
-        id: build
-
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
-        id: test
