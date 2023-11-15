@@ -2,7 +2,7 @@
 node_modules
 .vscode
 
-# *********dapp**********
+# ********* contracts **********
 # Compiler files
 packages/contracts/cache/
 packages/contracts/out/
@@ -18,8 +18,9 @@ packages/contracts/docs/
 # Dotenv file
 packages/contracts/.env
 
-# *********dapp**********
 
+
+# ********* dapp **********
 /packages/dapp/build
 /packages/dapp/public/build
 /packages/dapp/.env
@@ -31,6 +32,11 @@ packages/contracts/.env
 
 
 
-# *********congnito**********
+# ********* congnito **********
 packages/cognito-vm/.sunodo/
 packages/cognito-vm/.venv/
+
+
+
+# ********* api-gateway **********
+packages/api-gateway/node_modules

@@ -1,3 +1,9 @@
+[![Build & Test Contract](https://github.com/FibrinLab/tesseract/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/FibrinLab/tesseract/actions/workflows/build-and-test.yml)
+[![Yarn Audit](https://github.com/FibrinLab/tesseract/actions/workflows/yarn-audit.yml/badge.svg)](https://github.com/FibrinLab/tesseract/actions/workflows/yarn-audit.yml)
+[![🚀 Deploy](https://github.com/FibrinLab/tesseract/actions/workflows/continuous-deploy.yml/badge.svg)](https://github.com/FibrinLab/tesseract/actions/workflows/continuous-deploy.yml)
+
+
+
 ### Core Concept
 1. **Objective**: To develop a personalized medicine platform that utilizes blockchain technology for enhanced security, transparency, and decentralization.
 2. **Target Users**: Patients, medical practitioners, researchers, and pharmaceutical companies.

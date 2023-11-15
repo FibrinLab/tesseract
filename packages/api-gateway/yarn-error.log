@@ -1,0 +1,46 @@
+Arguments: 
+  /usr/bin/node /usr/local/bin/yarn run dev
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/akanimoh/.foundry/bin:/home/akanimoh/.foundry/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.13.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/akanimoh/Documents/dev/hackathon/tesseract/packages/api-gateway/package.json: Unexpected token } in JSON at position 121
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "api-gateway",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "dev": "nodemon gateway.js",
+    },
+    "license": "MIT",
+    "devDependencies": {
+      "nodemon": "^3.0.1"
+    },
+    "dependencies": {
+      "axios": "^1.6.2",
+      "express": "^4.18.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
