@@ -5,12 +5,11 @@
   "private": true,
   "author": "Akanimoh Osutuk",
   "license": "MIT",
-  "workspaces": [
-    "packages/contracts",
-    "packages/dapp"
-  ],
+  "workspaces": ["packages/*"],
   "scripts": {
-    "build:all": "yarn workspaces foreach run build"
+    "build:all": "yarn workspaces foreach run build",
+    "build:contract": "yarn workspace contracts forge:install",
+    "test:all": "yarn workspace contracts test:unit"
   },
   "engines": {
     "node": ">=18"
