@@ -11,6 +11,10 @@ struct AppStorage {
     uint256 reentrancyStatus;
     // others
     address tessTokenAddress;
+    address tessNFTAddress;
+    address bondingCurveAddress;
+    address bancorFormulaAddress;
+    address treasuryAddress;
     // pausable
     bool paused;
 }
@@ -23,7 +27,7 @@ library LibAppStorage {
     }
 }
 
-contract Modifier {
+contract Modifiers {
 
     AppStorage internal store;
 
@@ -48,6 +52,14 @@ contract Modifier {
         require(
             LibAccessControl.hasRole(DEFAULT_ADMIN_ROLE, msg.sender),
             "Manager: Caller is not admin"
+        );
+        _;
+    }
+
+    modifier onlyHealthProvider() {
+        require(
+            LibAccessControl.hasRole(HEALTH_PROVIDER_ROLE, msg.sender),
+            "Manager: Caller not health provider"
         );
         _;
     }
