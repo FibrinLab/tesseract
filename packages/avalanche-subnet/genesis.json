@@ -1,6 +1,6 @@
 {
     "config": {
-      "chainId": 1125,
+      "chainId": 1418,
       "homesteadBlock": 0,
       "eip150Block": 0,
       "eip150Hash": "0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0",
@@ -24,7 +24,11 @@
       },
       "contractDeployerAllowListConfig": {
         "blockTimestamp": 0,
-        "adminAddresses": ["0xf342231bF5864270DFd679F06e96f5Ac2EEe4BE7"]
+        "adminAddresses": ["0x115588402b1a27202a033bFcA6e0bd50f1218E27", "0x681097069555f8462cA09030Ac3e4d6dB28C3051"]
+      },
+      "contractNativeMinterConfig": {
+        "blockTimestamp": 0,
+        "adminAddresses": ["0x115588402b1a27202a033bFcA6e0bd50f1218E27", "0x681097069555f8462cA09030Ac3e4d6dB28C3051"]
       },
       "validatorOnly": true,
       "consensusParameters": {
@@ -34,8 +38,8 @@
       "appGossipNonValidatorSize": 10
     },
     "alloc": {
-      "f342231bF5864270DFd679F06e96f5Ac2EEe4BE7": {
-        "balance": "0x295BE96E64066972000000"
+      "681097069555f8462cA09030Ac3e4d6dB28C3051": {
+        "balance": "0x3635C9ADC5DEA00000"
       }
     },
     "nonce": "0x0",
@@ -48,4 +52,4 @@
     "number": "0x0",
     "gasUsed": "0x0",
     "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
-  }
+}

@@ -40,3 +40,22 @@ packages/cognito-vm/.venv/
 
 # ********* api-gateway **********
 packages/api-gateway/node_modules
+
+
+packages/frontend/node_modules
+packages/frontend/.pnp
+packages/frontend/.pnp.js
+packages/frontend/.yarn/install-state.gz
+packages/frontend/coverage
+packages/frontend/.next/
+packages/frontend/out/
+packages/frontend/build
+packages/frontend/.DS_Store
+packages/frontend/*.pem
+packages/frontend/npm-debug.log*
+packages/frontend/yarn-debug.log*
+packages/frontend/yarn-error.log*
+packages/frontend/.env*.local
+packages/frontend/.vercel
+packages/frontend/*.tsbuildinfo
+packages/frontend/next-env.d.ts
