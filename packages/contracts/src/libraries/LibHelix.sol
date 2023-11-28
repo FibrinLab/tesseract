@@ -2,6 +2,8 @@
 pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/utils/Strings.sol";
+import {LibAppStorage} from "./LibAppStorage.sol";
+import "../interfaces/IERC1155Tesseract.sol";
 
 
 library LibHelix {
@@ -33,6 +35,59 @@ library LibHelix {
         }
     }
 
+    function createPatient(address _patient) internal {
+        require(_patient != address(0), "Invalid provider address");
+        require(helixStorage().patients[_patient].isActive != true, "Inactive Patient");
+
+        helixStorage().patients[_patient].isActive = true;
+
+        string memory placeholder = createUniqueString();
+        helixStorage().patients[_patient].medicalDataHash.push(placeholder);
+
+        IERC1155Tesseract tNFT = IERC1155Tesseract(
+            LibAppStorage.appStorage().tessNFTAddress
+        );
+        string memory rand_id = generateRandomID();
+        uint256 id = stringToUint((rand_id));
+
+        tNFT.mint(_patient, id, 1, bytes(rand_id));
+
+        emit PatientCreated(_patient, block.timestamp);
+    }
+    
+    function generateRandomID() public view returns (string memory) {
+        // Characters to include in the ID
+        bytes memory chars = "ctga";
+
+        // Seed for pseudo-randomness
+        uint256 seed = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender)));
+
+        // Buffer for the ID string
+        bytes memory buffer = new bytes(16);
+
+        // Generate the ID
+        for (uint256 i = 0; i < 16; i++) {
+            buffer[i] = chars[seed % 4];
+            seed = uint256(keccak256(abi.encodePacked(seed)));
+        }
+
+        return string(buffer);
+    }
+
+    function stringToUint(string memory str) public pure returns (uint256) {
+        bytes memory b = bytes(str);
+        uint256 result = 0;
+        uint256 base = 1;
+        for (uint256 i = b.length; i > 0; i--) {
+            bytes1 char = b[i - 1];
+            uint256 digit = uint256(uint8(char) - 48); // '0' has ASCII value 48
+            require(digit < 10, "Invalid character in string");
+            result += digit * base;
+            base *= 10;
+        }
+        return result;
+    }
+
     function updatePatientData(address _patient, string memory _medicalDataHash) internal {
         
         require(bytes(_medicalDataHash).length > 0, "Invalid data hash");
@@ -43,18 +98,6 @@ library LibHelix {
         helixStorage().patients[_patient].nextUpdateTimestamp = block.timestamp + 1 days;
 
         emit PatientDataUpdated(_patient, _medicalDataHash, block.timestamp);
-    }
-
-    function createPatient(address _patient) internal {
-        require(_patient != address(0), "Invalid provider address");
-        require(helixStorage().patients[_patient].isActive != true, "Inactive Patient");
-
-        helixStorage().patients[_patient].isActive = true;
-
-        string memory placeholder = createUniqueString();
-        helixStorage().patients[_patient].medicalDataHash.push(placeholder);
-
-        emit PatientCreated(_patient, block.timestamp);
     }
 
     function authorizeProvider(address _patient, address _provider) internal {
