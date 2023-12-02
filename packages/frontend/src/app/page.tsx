@@ -17,9 +17,7 @@ export default function Home() {
       </h1>
       <h2 className="text-secondary-foreground leading-tight tracking-tighter">
       This platform aims to revolutionize how personal medical data is handled and analyzed, 
-      providing a secure and efficient method for delivering personalized medical insights. 
-      The combination of Avalanche's blockchain technology and Cartesi's decentralized computing could offer a robust and scalable solution. 
-      However, careful consideration must be given to regulatory compliance, data security, and user adoption strategies.
+      providing a secure and efficient method for delivering personalized medical insights.
       </h2>
       <div>{address}</div>
     </main>

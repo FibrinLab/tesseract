@@ -1,0 +1,17 @@
+Your Subnet's control keys: [P-fuji1tvmkpp3v8yd6pzam9uxsqkkxfz647n2zlp8wdu]
+Your subnet auth keys for chain creation: [P-fuji1tvmkpp3v8yd6pzam9uxsqkkxfz647n2zlp8wdu]
+Subnet has been created with ID: 2jSXKyhqQAjWSdqZY23eJ9TLCZFfbRLus4AxEEwtUHDQCJNFwS
+Now creating blockchain...
++--------------------+----------------------------------------------------+
+| DEPLOYMENT RESULTS |                                                    |
++--------------------+----------------------------------------------------+
+| Chain Name         | tessNet                                            |
++--------------------+----------------------------------------------------+
+| Subnet ID          | 2jSXKyhqQAjWSdqZY23eJ9TLCZFfbRLus4AxEEwtUHDQCJNFwS |
++--------------------+----------------------------------------------------+
+| VM ID              | tGBrLpVEuBapL3LzAe51nspvZJCcd9DXmS3qAZkviaTcMsJEX  |
++--------------------+----------------------------------------------------+
+| Blockchain ID      | uUZmk9LhVWHA8oPd9z2giM9HV4mndh2LVeJrERqZ31iJwTuRa  |
++--------------------+                                                    +
+| P-Chain TXID       |                                                    |
++--------------------+----------------------------------------------------+
