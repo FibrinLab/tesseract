@@ -3,6 +3,9 @@ pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
+import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+
 import "../interfaces/IAccessControl.sol";
 import {IERC20Tesseract} from "../interfaces/IERC20Tesseract.sol";
 import "../libraries/Constants.sol";
@@ -36,6 +39,20 @@ abstract contract ERC20Tesseract is ERC20Permit, ERC20Pausable, IERC20Tesseract 
     ) ERC20(name_, symbol_) ERC20Permit(name_) {
         _symbol = symbol_;
         accessControl = IAccessControl(_manager);
+    }
+
+    function __ERC20Ubiquity_init(
+        address _manager,
+        string memory name_,
+        string memory symbol_
+    ) internal onlyInitializing {
+        // init base contracts
+        __ERC20_init(name_, symbol_);
+        __ERC20Permit_init(name_);
+        __ERC20Pausable_init();
+        __UUPSUpgradeable_init();
+        // init the current contract
+        __ERC20Ubiquity_init_unchained(_manager, symbol_);
     }
 
     function setSymbol(string memory newSymbol) external onlyAdmin {
