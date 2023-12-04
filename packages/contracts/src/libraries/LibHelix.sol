@@ -46,7 +46,7 @@ library LibHelix {
         helixStorage().patients[_patient].medicalDataHash.push(placeholder);
 
         IERC1155Tesseract tNFT = IERC1155Tesseract(
-            LibAppStorage.appStorage().tessNFTAddress
+            LibAppStorage.appStorage().tesseractNFTAddress
         );
         string memory rand_id = generateRandomID();
         uint256 id = stringToUint((rand_id));

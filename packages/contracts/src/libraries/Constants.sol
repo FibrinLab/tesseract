@@ -20,6 +20,8 @@ bytes32 constant HEALTH_PROVIDER_ROLE = keccak256(
 
 /// @dev Role name for pauser
 bytes32 constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+bytes32 constant MINTER_ROLE = keccak256("MINTER_ROLE");
+bytes32 constant BURNER_ROLE = keccak256("BURNER_ROLE");
 
 /// @dev Reentrancy constant
 uint256 constant _NOT_ENTERED = 1;

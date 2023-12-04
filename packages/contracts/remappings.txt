@@ -7,3 +7,4 @@ forge-std/=lib/forge-std/src/
 @openzeppelin-contracts/=lib/openzeppelin-contracts/
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 chainlink/=lib/chainlink-brownie-contracts/contracts/src/
+openzeppelin-contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/

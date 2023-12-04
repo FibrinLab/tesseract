@@ -21,11 +21,16 @@ struct DiamondArgs {
 
 contract Diamond {    
 
-    constructor(IDiamondCut.FacetCut[] memory _diamondCut, DiamondArgs memory _args) payable {
+    constructor(
+        DiamondArgs memory _args,
+        IDiamondCut.FacetCut[] memory _diamondCutFacets
+    ) {
         LibDiamond.setContractOwner(_args.owner);
-        LibDiamond.diamondCut(_diamondCut, _args.init, _args.initCalldata);
-
-        // Code can be added here to perform actions and set state variables.
+        LibDiamond.diamondCut(
+            _diamondCutFacets,
+            _args.init,
+            _args.initCalldata
+        );
     }
 
     // Find facet for function that is called and execute the

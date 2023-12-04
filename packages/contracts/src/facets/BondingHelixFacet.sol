@@ -11,7 +11,7 @@ import {IBondingHelix} from "../interfaces/IBondingHelix.sol";
  * @notice Inspired from Bancor protocol https://github.com/bancorprotocol/contracts
  * @notice 
  */
-contract BondingCurveFacet is Modifiers, IBondingHelix {
+contract BondingHelixFacet is Modifiers, IBondingHelix {
 
     function setParams(
         uint32 _connectorWeight,

@@ -10,9 +10,9 @@ struct AppStorage {
     // reentrancy guard
     uint256 reentrancyStatus;
     // others
-    address tessTokenAddress;
-    address tessNFTAddress;
-    address bondingCurveAddress;
+    address tesseractTokenAddress;
+    address tesseractNFTAddress;
+    address bondingHelixAddress;
     address bancorFormulaAddress;
     address treasuryAddress;
     // pausable

@@ -13,7 +13,7 @@ import "chainlink/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "chainlink/v0.8/VRFConsumerBaseV2.sol";
 
 /**
- * @notice Bonding curve library based on Bancor formula
+ * @notice Bonding Curve library based on Bancor formula
  * @notice Inspired from Bancor protocol https://github.com/bancorprotocol/contracts
  * @notice 
  */
@@ -29,7 +29,7 @@ library LibBondingHelix {
     event Withdraw(uint256 amount);
     event ParamsSet(uint32 connectorWeight, uint256 baseY);
 
-    struct BondingCurveData {
+    struct BondingHelixData {
         uint32 connectorWeight;
         uint256 baseY;
         uint256 poolBalance;
@@ -37,10 +37,10 @@ library LibBondingHelix {
         mapping(address => uint256) share;
     }
 
-    function bondingCurveStorage()
+    function bondingHelixStorage()
         internal
         pure
-        returns (BondingCurveData storage l)
+        returns (BondingHelixData storage l)
     {
         bytes32 slot = BONDING_CONTROL_STORAGE_SLOT;
         assembly {
@@ -55,28 +55,28 @@ library LibBondingHelix {
         );
         require(_baseY > 0, "must valid baseY");
 
-        bondingCurveStorage().connectorWeight = _connectorWeight;
-        bondingCurveStorage().baseY = _baseY;
+        bondingHelixStorage().connectorWeight = _connectorWeight;
+        bondingHelixStorage().baseY = _baseY;
         emit ParamsSet(_connectorWeight, _baseY);
     }
 
     function connectorWeight() internal view returns (uint32) {
-        return bondingCurveStorage().connectorWeight;
+        return bondingHelixStorage().connectorWeight;
     }
 
     function baseY() internal view returns (uint256) {
-        return bondingCurveStorage().baseY;
+        return bondingHelixStorage().baseY;
     }
 
     function poolBalance() internal view returns (uint256) {
-        return bondingCurveStorage().poolBalance;
+        return bondingHelixStorage().poolBalance;
     }
 
     function deposit(
         uint256 _collateralDeposited,
         address _recipient
     ) internal {
-        BondingCurveData storage ss = bondingCurveStorage();
+        BondingHelixData storage ss = bondingHelixStorage();
         require(ss.connectorWeight != 0 && ss.baseY != 0, "not set");
 
         uint256 tokensReturned;
@@ -97,8 +97,8 @@ library LibBondingHelix {
             );
         }
 
-        IERC20 dollar = IERC20(LibAppStorage.appStorage().tessTokenAddress);
-        dollar.transferFrom(_recipient, address(this), _collateralDeposited);
+        IERC20 tesseract = IERC20(LibAppStorage.appStorage().tesseractTokenAddress);
+        tesseract.transferFrom(_recipient, address(this), _collateralDeposited);
 
         ss.poolBalance = ss.poolBalance + _collateralDeposited;
         bytes memory tokReturned = toBytes(tokensReturned);
@@ -106,7 +106,7 @@ library LibBondingHelix {
         ss.tokenIds += 1;
 
         IERC1155Tesseract bNFT = IERC1155Tesseract(
-            LibAppStorage.appStorage().tessNFTAddress
+            LibAppStorage.appStorage().tesseractNFTAddress
         );
         bNFT.mint(_recipient, ss.tokenIds, tokensReturned, tokReturned);
 
@@ -114,7 +114,7 @@ library LibBondingHelix {
     }
 
     function getShare(address _recipient) internal view returns (uint256) {
-        BondingCurveData storage ss = bondingCurveStorage();
+        BondingHelixData storage ss = bondingHelixStorage();
         return ss.share[_recipient];
     }
 
@@ -126,12 +126,12 @@ library LibBondingHelix {
     }
 
     function withdraw(uint256 _amount) internal {
-        BondingCurveData storage ss = bondingCurveStorage();
+        BondingHelixData storage ss = bondingHelixStorage();
         require(_amount <= ss.poolBalance, "invalid amount");
 
-        IERC20 tess = IERC20(LibAppStorage.appStorage().tessTokenAddress);
+        IERC20 tesseract = IERC20(LibAppStorage.appStorage().tesseractTokenAddress);
         uint256 toTransfer = _amount;
-        tess.safeTransfer(
+        tesseract.safeTransfer(
             LibAppStorage.appStorage().treasuryAddress,
             toTransfer
         );
