@@ -4,7 +4,7 @@ pragma solidity 0.8.20;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import {LibAppStorage} from "./LibAppStorage.sol";
 import "../interfaces/IERC1155Tesseract.sol";
-
+import "../core/VRFConsumer.sol";
 
 library LibHelix {
 
@@ -12,7 +12,6 @@ library LibHelix {
         bytes32(uint256(keccak256("tesseract.contracts.helix.storage")) - 1);
 
     struct Patient {
-        
         string[] medicalDataHash;
         address[] authorizedProviders;
         uint256 nextUpdateTimestamp;
@@ -25,8 +24,12 @@ library LibHelix {
     event ProviderRevoked(address indexed patient, address indexed provider);
 
     struct HelixData {
-
         mapping(address => Patient) patients;
+        VRFv2Consumer consumer;
+    }
+
+    function init(address _vrfAddr) internal {
+        helixStorage().consumer = VRFv2Consumer(_vrfAddr);
     }
 
     function helixStorage() internal pure returns (HelixData storage l) {
@@ -48,8 +51,12 @@ library LibHelix {
         IERC1155Tesseract tNFT = IERC1155Tesseract(
             LibAppStorage.appStorage().tesseractNFTAddress
         );
+
+        uint256 id = helixStorage().consumer.requestRandomWords();
+
+        // Backup randomness function
         string memory rand_id = generateRandomID();
-        uint256 id = stringToUint((rand_id));
+        // uint256 id = stringToUint((rand_id));
 
         tNFT.mint(_patient, id, 1, bytes(rand_id));
 
