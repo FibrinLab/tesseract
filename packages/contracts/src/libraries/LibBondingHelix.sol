@@ -9,8 +9,6 @@ import "../interfaces/IERC1155Tesseract.sol";
 import "./Constants.sol";
 import "../utils/ABDKMathQuad.sol";
 
-import "chainlink/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
-import "chainlink/v0.8/VRFConsumerBaseV2.sol";
 
 /**
  * @notice Bonding Curve library based on Bancor formula

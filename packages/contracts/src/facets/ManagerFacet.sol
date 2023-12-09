@@ -57,5 +57,4 @@ contract ManagerFacet is Modifiers {
     function tesseractNFTAddress() external view returns (address) {
         return store.tesseractNFTAddress;
     }
-
 }

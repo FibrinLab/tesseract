@@ -17,6 +17,8 @@ remappings = [
 
 [rpc_endpoints]
 goerli = "${GOERLI_RPC_URL}"
+fuji = "${FUJI_RPC_URL}"
+fork_url = "${FORK_URL}"
 
 [etherscan]
 goerli = { key = "${ETHERSCAN_API_KEY}" }

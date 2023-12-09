@@ -12,7 +12,7 @@ contract TestDiamond is DiamondTestSetup {
     }
 
     function testHasMultipleFacets() public {
-        assertEq(facetAddressList.length, 6);
+        assertEq(facetAddressList.length, 8);
     }
 
     function testFacetsHaveCorrectSelectors() public {

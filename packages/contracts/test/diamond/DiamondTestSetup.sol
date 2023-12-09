@@ -13,6 +13,8 @@ import {DiamondCutFacet} from "../../src/facets/DiamondCutFacet.sol";
 import {DiamondLoupeFacet} from "../../src/facets/DiamondLoupeFacet.sol";
 import {ManagerFacet} from "../../src/facets/ManagerFacet.sol";
 import {OwnershipFacet} from "../../src/facets/OwnershipFacet.sol";
+import {HelixFacet} from "../../src/facets/HelixFacet.sol";
+import {MarketPoolFacet} from "../../src/facets/MarketPoolFacet.sol";
 import {DiamondInit} from "../../src/upgradeInitializers/DiamondInit.sol";
 import {DiamondTestHelper} from "../helpers/DiamondTestHelper.sol";
 import {UUPSTestHelper} from "../helpers/UUPSTestHelper.sol";
@@ -30,6 +32,8 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
     DiamondLoupeFacet diamondLoupeFacet;
     ManagerFacet managerFacet;
     OwnershipFacet ownershipFacet;
+    HelixFacet helixFacet;
+    MarketPoolFacet marketPoolfacet;
 
     AccessControlFacet accessControlFacetImplementation;
     BondingHelixFacet bondingHelixFacetImplementation;
@@ -37,6 +41,8 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
     DiamondLoupeFacet diamondLoupeFacetImplementation;
     ManagerFacet managerFacetImplementation;
     OwnershipFacet ownershipFacetImplementation;
+    HelixFacet helixFacetImplementation;
+    MarketPoolFacet marketPoolfacetImplementation;
 
     // facet names with addresses
     string[] facetNames;
@@ -56,6 +62,8 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
     bytes4[] selectorsOfDiamondLoupeFacet;
     bytes4[] selectorsOfManagerFacet;
     bytes4[] selectorsOfOwnershipFacet;
+    bytes4[] selectorsOfHelixFacet;
+    bytes4[] selectorsOfMarketPoolFacet;
 
     /// @notice Deploys diamond and connects facets
     function setUp() public virtual {
@@ -85,6 +93,12 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
         selectorsOfOwnershipFacet = getSelectorsFromAbi(
             "/out/OwnershipFacet.sol/OwnershipFacet.json"
         );
+        selectorsOfHelixFacet = getSelectorsFromAbi(
+            "/out/HelixFacet.sol/HelixFacet.json"
+        );
+        selectorsOfMarketPoolFacet = getSelectorsFromAbi(
+            "/out/MarketPoolFacet.sol/MarketPoolFacet.json"
+        );
 
         // deploy facet implementation instances
         accessControlFacetImplementation = new AccessControlFacet();
@@ -93,6 +107,9 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
         diamondLoupeFacetImplementation = new DiamondLoupeFacet();
         managerFacetImplementation = new ManagerFacet();
         ownershipFacetImplementation = new OwnershipFacet();
+        helixFacetImplementation = new HelixFacet();
+        marketPoolfacetImplementation = new MarketPoolFacet();
+
 
         // prepare diamond init args
         diamondInit = new DiamondInit();
@@ -119,7 +136,7 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
             )
         });
 
-        FacetCut[] memory cuts = new FacetCut[](6);
+        FacetCut[] memory cuts = new FacetCut[](8);
 
         cuts[0] = (
             FacetCut({
@@ -163,6 +180,20 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
                 functionSelectors: selectorsOfOwnershipFacet
             })
         );
+        cuts[6] = (
+            FacetCut({
+                facetAddress: address(helixFacetImplementation),
+                action: FacetCutAction.Add,
+                functionSelectors: selectorsOfHelixFacet
+            })
+        );
+        cuts[7] = (
+            FacetCut({
+                facetAddress: address(marketPoolfacetImplementation),
+                action: FacetCutAction.Add,
+                functionSelectors: selectorsOfMarketPoolFacet
+            })
+        );
         
 
         // deploy diamond
@@ -176,6 +207,9 @@ abstract contract DiamondTestSetup is DiamondTestHelper, UUPSTestHelper {
         diamondLoupeFacet = DiamondLoupeFacet(address(diamond));
         managerFacet = ManagerFacet(address(diamond));
         ownershipFacet = OwnershipFacet(address(diamond));
+        helixFacet = HelixFacet(address(diamond));
+        managerFacet = ManagerFacet(address(diamond));
+
 
         // get all addresses
         facetAddressList = diamondLoupeFacet.facetAddresses();
