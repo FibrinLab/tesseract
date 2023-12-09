@@ -164,7 +164,7 @@ library LibHelix {
         return string(buffer);
     }
 
-    function stringToUint(string memory str) public pure returns (uint256) {
+    function stringToUint(string memory str) internal pure returns (uint256) {
         bytes memory b = bytes(str);
         uint256 result = 0;
         uint256 base = 1;

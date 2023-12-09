@@ -9,7 +9,6 @@ import { Web3Button, Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { avalancheFuji, sepolia, filecoin } from "wagmi/chains";
 import Navbar from "./navbar";
-import { HeliaProvider } from "./HeliaContext";
 
 const projectId = process.env.walletConnectProjectId!;
 const chains = [avalancheFuji, sepolia, filecoin];
@@ -30,14 +29,12 @@ export default function WrappedApp({
 }) {
   return (
     <>
-      <HeliaProvider>
-        <Navbar />
-        <WagmiConfig config={config}>{children}</WagmiConfig>
-        <div className="absolute top-10 right-10">
-          <Web3Button />
-        </div>
-        <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
-      </HeliaProvider>
+      <Navbar />
+      <WagmiConfig config={config}>{children}</WagmiConfig>
+      <div className="absolute top-10 right-10">
+        <Web3Button />
+      </div>
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
   );
 }
