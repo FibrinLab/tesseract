@@ -32,11 +32,11 @@ contract ManagerFacet is Modifiers {
         store.treasuryAddress = _treasuryAddress;
     }
 
-    function dollarTokenAddress() external view returns (address) {
+    function tesseractTokenAddress() external view returns (address) {
         return store.tesseractTokenAddress;
     }
 
-    function bondingCurveAddress() external view returns (address) {
+    function bondingHelixAddress() external view returns (address) {
         return store.bondingHelixAddress;
     }
 
@@ -46,6 +46,16 @@ contract ManagerFacet is Modifiers {
 
     function treasuryAddress() external view returns (address) {
         return store.treasuryAddress;
+    }
+
+    function setTesseractNFTAddress(
+        address _tesseractNFTAddress
+    ) external onlyAdmin {
+        store.tesseractNFTAddress = _tesseractNFTAddress;
+    }
+
+    function tesseractNFTAddress() external view returns (address) {
+        return store.tesseractNFTAddress;
     }
 
 }

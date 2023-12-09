@@ -32,3 +32,4 @@ uint256 constant _ENTERED = 2;
 uint256 constant ONE = uint256(1 ether);
 uint256 constant ACCURACY = 10e18;
 uint32 constant MAX_WEIGHT = 1e6;
+uint256 constant DAYS = 2 days;

@@ -13,8 +13,10 @@ contract ERC1155Tesseract is ERC1155, ERC1155Burnable, ERC1155Pausable {
     using SafeAddArray for uint256[];
 
     IAccessControl public accessControl;
+    address public minter;
 
     mapping(address => uint256[]) public holderBalances;
+    mapping(uint256 => mapping(address => bool)) public accessRights;
 
     uint256 public totalSupply;
 
@@ -107,9 +109,13 @@ contract ERC1155Tesseract is ERC1155, ERC1155Burnable, ERC1155Pausable {
         uint256 amount,
         bytes memory data
     ) public virtual override {
-        super.safeTransferFrom(from, to, id, amount, data);
-        holderBalances[to].add(id);
+        require(from == msg.sender || isApprovedForAll(from, msg.sender), "ERC1155: caller is not owner nor approved");
+        require(checkAccess(id, from), "No access rights to transfer");
+
+        // Instead of transferring ownership, grant access rights to the recipient
+        grantAccess(id, to);
     }
+
 
     function safeBatchTransferFrom(
         address from,
@@ -135,5 +141,25 @@ contract ERC1155Tesseract is ERC1155, ERC1155Burnable, ERC1155Pausable {
         uint256[] memory values
     ) internal virtual override(ERC1155, ERC1155Pausable) {
         super._update(from, to, ids, values);
+    }
+
+    function setMinter(address minter_) public {
+        minter = minter_;
+    }
+
+    function mintMedicalData(address to, uint256 id, uint256 amount) external onlyAdmin() {
+        _mint(to, id, amount, "");
+    }
+
+    function grantAccess(uint256 id, address user) public {
+        accessRights[id][user] = true;
+    }
+
+    function revokeAccess(uint256 id, address user) public {
+        accessRights[id][user] = false;
+    }
+
+    function checkAccess(uint256 id, address user) public view returns (bool) {
+        return accessRights[id][user];
     }
 }

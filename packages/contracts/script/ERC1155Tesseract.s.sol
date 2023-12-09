@@ -9,7 +9,7 @@ contract MyScript is Script {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
 
-        ERC1155Tesseract nft = new ERC1155Tesseract(0x115588402b1a27202a033bFcA6e0bd50f1218E27, "baseUri");
+        new ERC1155Tesseract(0x115588402b1a27202a033bFcA6e0bd50f1218E27, "baseUri");
 
         vm.stopBroadcast();
     }
