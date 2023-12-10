@@ -14,8 +14,7 @@ Tesseract AI is a pioneering decentralized platform designed for the secure mana
 ## Important Links
 
 1. [WhitePaper](https://docs.google.com/document/d/1w4POWznZOrzIKqL_8Ng-NnZHwbd8tZ13b6_Iw5uTocg/edit?usp=sharing)
-2. [Youtube Presentation]()
-3. [Front End]()
+2. [Youtube Presentation](https://youtu.be/yQ_YIChonpw)
 
 
 
